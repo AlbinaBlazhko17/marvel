@@ -3,6 +3,7 @@ import AppHeader from '../appHeader/AppHeader';
 import RandomChar from '../randomChar/RandomChar';
 import CharList from '../charList/CharList';
 import CharInfo from '../charInfo/CharInfo';
+import ErrorBoundary from '../errorBoundary/ErrorBoundary';
 
 class App extends Component {
     state = {
@@ -23,7 +24,9 @@ class App extends Component {
                     <RandomChar/>
                     <div className="char__content">
                         <CharList onCharSelected={this.onCharSelected} />
-                        <CharInfo charId={this.state.characterId} />
+                        <ErrorBoundary>
+                            <CharInfo charId={this.state.characterId} />
+                        </ErrorBoundary>
                     </div>
                 </main>
             </div>
