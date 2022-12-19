@@ -3,15 +3,12 @@ import { PropTypes } from 'prop-types';
 import './CharInfo.scss';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
-import MarvelService from '../../services/MarvelService';
+import useMarvelService from '../../services/MarvelService';
 import Skeleton from '../skeleton/skeleton';
 
 const CharInfo = (props) => {
     const [char, setChar] = useState(null),
-          [loading, setLoading] = useState(false),
-          [error, setError] = useState(false);
-
-    const marvelService = new MarvelService();
+          {loading, error, getCharacter, clearError} =  useMarvelService();
 
     useEffect(() =>{
         updateChar();
@@ -21,25 +18,13 @@ const CharInfo = (props) => {
         const {charId} = props;
         if(!charId) return;
 
-        onCharLoading();
-
-        marvelService.getCharacter(charId)
-                     .then(onCharLoaded)
-                     .catch(onError);
+        clearError();
+        getCharacter(charId)
+                .then(onCharLoaded)
     }
 
     const onCharLoaded = (char) => {
-        setLoading(false);
         setChar(char);
-    }
-
-    const onError = () => {
-        setLoading(false);
-        setError(true);
-    }
-
-    const onCharLoading = () => {
-        setLoading(true);
     }
 
     const skeleton = char || loading || error ? null : <Skeleton/>
