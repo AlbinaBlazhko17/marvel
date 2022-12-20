@@ -3,6 +3,8 @@ import useMarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
+import '../comicsList/ComicsList.scss'
+
 const ComicsList = () => {
     const [comicsList, setComicsList] = useState([]),
     [newItemLoading, setNewItemLoading] = useState(false),
@@ -35,7 +37,7 @@ const ComicsList = () => {
     const renderItems = (arr) => {
         const items = arr.map((item, i) => {
             return (
-                <li className="comics__item">
+                <li className="comics__item" key={item.id}>
                     <a href="#">
                         <img src={item.thumbnail} alt={item.title} className="comics__item-img"/>
                         <div className="comics__item-name">{item.name}</div>
