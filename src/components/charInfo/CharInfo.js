@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
-import './CharInfo.scss';
+
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import useMarvelService from '../../services/MarvelService';
 import Skeleton from '../skeleton/skeleton';
+
+import './CharInfo.scss';
 
 const CharInfo = (props) => {
     const [char, setChar] = useState(null),
